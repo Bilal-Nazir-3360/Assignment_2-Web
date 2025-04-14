@@ -1,6 +1,6 @@
 # PlanPilot - Task Management System
 
-![PlanPilot Demo](./Screenshot.jpeg) 
+![PlanPilot Demo](./image.jpeg) 
 
 A modern task management web application with dynamic content loading, real-time statistics, and interactive features.
 
