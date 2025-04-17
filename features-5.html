@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Sync - PlanPilot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .feature-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.3), rgba(255, 204, 0, 0.3));
+            z-index: 1;
+        }
+        
+        .feature-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .back-link {
+            color: var(--teal);
+            text-decoration: none;
+            margin-bottom: 30px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--yellow);
+            transform: translateX(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 5rem;
+            color: var(--teal);
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .feature-demo {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-demo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(45, 212, 191, 0.3);
+        }
+        
+        .feature-benefit {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--teal);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-benefit:hover {
+            transform: translateX(10px);
+            border-left-color: var(--yellow);
+        }
+        
+        .feature-benefit i {
+            color: var(--teal);
+            margin-right: 10px;
+        }
+        
+        .feature-section {
+            padding: 80px 0;
+        }
+        
+        .feature-section:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+        
+        .feature-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(255, 204, 0, 0.1));
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .sync-feature {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        
+        .sync-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(45, 212, 191, 0.2);
+            border-color: var(--yellow);
+        }
+        
+        .sync-icon {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-bottom: 15px;
+        }
+        
+        .device-demo {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        
+        .device-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .device-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #121212;
+        }
+        
+        .device-title {
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        
+        .device-status {
+            color: #888;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+        
+        .device-content {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .sync-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background: rgba(45, 212, 191, 0.1);
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .sync-status i {
+            color: var(--teal);
+        }
+        
+        .sync-progress {
+            width: 100%;
+            height: 4px;
+            background: rgba(45, 212, 191, 0.2);
+            border-radius: 2px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .sync-progress-bar {
+            height: 100%;
+            background: var(--teal);
+            width: 0;
+            transition: width 1s ease;
+        }
+        
+        .device-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .device-card {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        
+        .device-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(45, 212, 191, 0.2);
+            border-color: var(--yellow);
+        }
+        
+        .device-card i {
+            font-size: 3rem;
+            color: var(--teal);
+            margin-bottom: 15px;
+        }
+        
+        .sync-animation {
+            position: relative;
+            height: 200px;
+            margin: 40px 0;
+        }
+        
+        .sync-circle {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--teal);
+            font-size: 1.5rem;
+            border: 2px solid var(--teal);
+        }
+        
+        .sync-circle:nth-child(1) {
+            left: 20%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .sync-circle:nth-child(2) {
+            left: 50%;
+            top: 20%;
+            transform: translateX(-50%);
+        }
+        
+        .sync-circle:nth-child(3) {
+            right: 20%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .sync-line {
+            position: absolute;
+            background: var(--teal);
+            height: 2px;
+            width: 100px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-rocket"></i> PlanPilot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" id="featuresDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-star"></i> Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="features-overview.html"><i class="fas fa-cube"></i>Overview</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="features-1.html"><i class="fas fa-tasks"></i>Task Organization</a></li>
+                            <li><a class="dropdown-item" href="features-2.html"><i class="fas fa-chart-line"></i>Progress Tracking</a></li>
+                            <li><a class="dropdown-item" href="features-3.html"><i class="fas fa-users"></i>Team Collaboration</a></li>
+                            <li><a class="dropdown-item" href="features-4.html"><i class="fas fa-bell"></i>Deadline Alerts</a></li>
+                            <li><a class="dropdown-item active" href="features-5.html"><i class="fas fa-cloud"></i>Cloud Sync</a></li>
+                            <li><a class="dropdown-item" href="features-6.html"><i class="fas fa-palette"></i>Custom Themes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#reviews"><i class="fas fa-comments"></i> Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="feature-hero">
+        <div class="container">
+            <a href="index.html#features" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Features
+            </a>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Cloud Sync</h1>
+                    <p class="lead animate__animated animate__fadeIn animate__delay-1s">Access your tasks from anywhere</p>
+                    <p class="animate__animated animate__fadeIn animate__delay-2s">Seamlessly sync your tasks and projects across all your devices with our secure cloud infrastructure.</p>
+                    <button class="btn btn-custom mt-4 animate__animated animate__fadeInUp animate__delay-3s">Try It Now</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-cloud feature-icon animate__animated animate__bounceIn animate__delay-2s"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Key Benefits</h2>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft">
+                        <i class="fas fa-sync"></i>
+                        <strong>Real-time synchronization</strong>
+                        <p>Your tasks and projects are instantly updated across all your devices.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-1s">
+                        <i class="fas fa-shield-alt"></i>
+                        <strong>Secure storage</strong>
+                        <p>Your data is encrypted and stored in secure cloud servers with regular backups.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-2s">
+                        <i class="fas fa-mobile-alt"></i>
+                        <strong>Multi-device support</strong>
+                        <p>Access your tasks from any device - desktop, tablet, or mobile phone.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-3s">
+                        <i class="fas fa-wifi"></i>
+                        <strong>Offline access</strong>
+                        <p>Work on your tasks even without an internet connection.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cloud Sync Demo" class="img-fluid feature-demo animate__animated animate__fadeInRight">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-2">
+                    <h2 class="mb-4">Detailed Description</h2>
+                    <p class="lead">Our cloud synchronization system ensures your tasks and projects are always up-to-date across all your devices. With enterprise-grade security and real-time updates, you can work seamlessly from anywhere.</p>
+                    <div class="mt-4">
+                        <h5>Features include:</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Real-time data synchronization</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>End-to-end encryption</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Automatic conflict resolution</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Offline mode support</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Version history</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Cross-platform compatibility</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="feature-image animate__animated animate__fadeInLeft">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cloud Sync Interface" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Sync Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="sync-feature animate__animated animate__fadeInUp">
+                        <i class="fas fa-bolt sync-icon"></i>
+                        <h4>Instant Sync</h4>
+                        <p>Changes are instantly synchronized across all your devices in real-time.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="sync-feature animate__animated animate__fadeInUp animate__delay-1s">
+                        <i class="fas fa-lock sync-icon"></i>
+                        <h4>Secure Storage</h4>
+                        <p>Your data is encrypted and stored in secure cloud servers with regular backups.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="sync-feature animate__animated animate__fadeInUp animate__delay-2s">
+                        <i class="fas fa-history sync-icon"></i>
+                        <h4>Version History</h4>
+                        <p>Access previous versions of your tasks and restore changes if needed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Device Synchronization</h2>
+            <div class="device-grid">
+                <div class="device-card animate__animated animate__fadeInUp">
+                    <i class="fas fa-desktop"></i>
+                    <h4>Desktop</h4>
+                    <p>Windows, macOS, Linux</p>
+                    <div class="sync-status">
+                        <span>Last synced: 2 min ago</span>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="device-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Mobile</h4>
+                    <p>iOS, Android</p>
+                    <div class="sync-status">
+                        <span>Last synced: Just now</span>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="device-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <i class="fas fa-tablet-alt"></i>
+                    <h4>Tablet</h4>
+                    <p>iPad, Android tablets</p>
+                    <div class="sync-status">
+                        <span>Last synced: 5 min ago</span>
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Sync Demo</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="device-demo animate__animated animate__fadeInLeft">
+                        <div class="device-header">
+                            <div class="device-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h5 class="device-title">Desktop App</h5>
+                            <span class="device-status">Online</span>
+                        </div>
+                        <div class="device-content">
+                            <p>Editing task: "Complete project proposal"</p>
+                            <div class="sync-progress">
+                                <div class="sync-progress-bar" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="device-demo animate__animated animate__fadeInRight">
+                        <div class="device-header">
+                            <div class="device-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h5 class="device-title">Mobile App</h5>
+                            <span class="device-status">Syncing...</span>
+                        </div>
+                        <div class="device-content">
+                            <p>Receiving updates from desktop</p>
+                            <div class="sync-progress">
+                                <div class="sync-progress-bar" style="width: 45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Sync Process</h2>
+            <div class="sync-animation">
+                <div class="sync-circle">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="sync-circle">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="sync-circle">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="sync-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="mb-4">Ready to Access Your Tasks Anywhere?</h2>
+            <p class="lead mb-5">Join thousands of users who have improved their productivity with PlanPilot's cloud sync.</p>
+            <button class="btn btn-custom btn-lg animate__animated animate__pulse animate__infinite">
+                Get Started Now <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>© 2025 PlanPilot. All Rights Reserved.</p>
+            <p>contact@PlanPilot.com | <a href="index.html#reviews" class="text-light">Feedback</a></p>
+            <div class="mt-3">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                $('.navbar').toggleClass('navbar-scrolled', $(this).scrollTop() > 100);
+            });
+            
+            // Animate elements on scroll
+            $(window).scroll(function() {
+                $('.animate__animated').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animate__fadeIn');
+                    }
+                });
+            });
+            
+            // Animate sync progress bars
+            $('.sync-progress-bar').each(function() {
+                $(this).css('width', $(this).parent().width() * 0.75);
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Organization - PlanPilot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .feature-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.3), rgba(255, 204, 0, 0.3));
+            z-index: 1;
+        }
+        
+        .feature-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .back-link {
+            color: var(--teal);
+            text-decoration: none;
+            margin-bottom: 30px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--yellow);
+            transform: translateX(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 5rem;
+            color: var(--teal);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .feature-demo {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-demo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(45, 212, 191, 0.3);
+        }
+        
+        .feature-benefit {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--teal);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-benefit:hover {
+            transform: translateX(10px);
+            border-left-color: var(--yellow);
+        }
+        
+        .feature-benefit i {
+            color: var(--teal);
+            margin-right: 10px;
+        }
+        
+        .feature-section {
+            padding: 80px 0;
+        }
+        
+        .feature-section:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+        
+        .feature-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(255, 204, 0, 0.1));
+            padding: 80px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">PlanPilot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#home"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" id="featuresDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-star"></i> Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="features-overview.html"><i class="fas fa-cube"></i>Overview</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item active" href="features-1.html"><i class="fas fa-tasks"></i>Task Organization</a></li>
+                            <li><a class="dropdown-item" href="features-2.html"><i class="fas fa-chart-line"></i>Progress Tracking</a></li>
+                            <li><a class="dropdown-item" href="features-3.html"><i class="fas fa-users"></i>Team Collaboration</a></li>
+                            <li><a class="dropdown-item" href="features-4.html"><i class="fas fa-bell"></i>Deadline Alerts</a></li>
+                            <li><a class="dropdown-item" href="features-5.html"><i class="fas fa-cloud"></i>Cloud Sync</a></li>
+                            <li><a class="dropdown-item" href="features-6.html"><i class="fas fa-palette"></i>Custom Themes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#reviews"><i class="fas fa-comments"></i> Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#contact"><i class="fas fa-envelope"></i> Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="feature-hero">
+        <div class="container">
+            <a href="index.html#features" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Features
+            </a>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Task Organization</h1>
+                    <p class="lead animate__animated animate__fadeIn animate__delay-1s">Master your workflow with our advanced task management system</p>
+                    <p class="animate__animated animate__fadeIn animate__delay-2s">Easily manage your tasks with our intuitive interface and powerful categorization tools.</p>
+                    <button class="btn btn-custom mt-4 animate__animated animate__fadeInUp animate__delay-3s">Try It Now</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-tasks feature-icon animate__animated animate__bounceIn animate__delay-2s"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Key Benefits</h2>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft">
+                        <i class="fas fa-drag-indicator"></i>
+                        <strong>Intuitive drag-and-drop interface</strong>
+                        <p>Rearrange tasks with simple drag-and-drop functionality for a seamless experience.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-1s">
+                        <i class="fas fa-tags"></i>
+                        <strong>Customizable categories and tags</strong>
+                        <p>Organize tasks with custom categories and tags that match your workflow.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-2s">
+                        <i class="fas fa-flag"></i>
+                        <strong>Priority management system</strong>
+                        <p>Set and adjust task priorities to focus on what matters most.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-3s">
+                        <i class="fas fa-project-diagram"></i>
+                        <strong>Cross-project organization</strong>
+                        <p>Manage tasks across multiple projects with ease.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1551288049-ebfccdc6dbde?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Task Organization Demo" class="img-fluid feature-demo animate__animated animate__fadeInRight">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-2">
+                    <h2 class="mb-4">Detailed Description</h2>
+                    <p class="lead">Our task organization system provides a comprehensive solution for managing both simple to-do lists and complex projects. With multiple viewing options (list, board, and timeline views), you can organize tasks in the way that works best for you.</p>
+                    <div class="mt-4">
+                        <h5>Features include:</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Recurring task scheduling</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Subtask management</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>File attachments</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Comments and notes</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Custom fields</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Advanced filtering</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="feature-image animate__animated animate__fadeInLeft">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Task Management Interface" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">How It Works</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="card-body text-center">
+                            <div class="rounded-circle bg-teal d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                                <i class="fas fa-plus fa-2x"></i>
+                            </div>
+                            <h4>1. Create Tasks</h4>
+                            <p>Add tasks with titles, descriptions, due dates, and priorities.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="card-body text-center">
+                            <div class="rounded-circle bg-teal d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                                <i class="fas fa-layer-group fa-2x"></i>
+                            </div>
+                            <h4>2. Organize</h4>
+                            <p>Group tasks into projects, add tags, and set up custom categories.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="card-body text-center">
+                            <div class="rounded-circle bg-teal d-flex align-items-center justify-content-center mx-auto mb-4" style="width: 80px; height: 80px;">
+                                <i class="fas fa-check-double fa-2x"></i>
+                            </div>
+                            <h4>3. Complete</h4>
+                            <p>Track progress and mark tasks as complete when finished.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="mb-4">Ready to Organize Your Tasks?</h2>
+            <p class="lead mb-5">Join thousands of users who have transformed their productivity with PlanPilot's task organization.</p>
+            <button class="btn btn-custom btn-lg animate__animated animate__pulse animate__infinite">
+                Get Started Now <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>© 2025 PlanPilot. All Rights Reserved.</p>
+            <p>contact@PlanPilot.com | <a href="index.html#reviews" class="text-light">Feedback</a></p>
+            <div class="mt-3">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Page Loading Modal -->
+    <div class="modal fade" id="pageLoadingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-body text-center p-5">
+                    <div class="loading-animation mb-4">
+                        <div class="loading-circle"></div>
+                        <div class="loading-circle"></div>
+                        <div class="loading-circle"></div>
+                    </div>
+                    <h4 class="loading-text mb-3">Loading <span class="loading-dots">...</span></h4>
+                    <p class="loading-message">Preparing your experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Show loading modal on page load
+            const loadingModal = new bootstrap.Modal(document.getElementById('pageLoadingModal'));
+            loadingModal.show();
+            
+            // Add loading class to body
+            document.body.classList.add('loading');
+            
+            // Hide loading after a delay
+            setTimeout(function() {
+                loadingModal.hide();
+                document.body.classList.remove('loading');
+                
+                // Add visible class to content for fade-in effect
+                $('.feature-hero, .feature-section, .cta-section, footer').addClass('visible');
+            }, 1000);
+            
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                $('.navbar').toggleClass('navbar-scrolled', $(this).scrollTop() > 100);
+            });
+            
+            // Animate elements on scroll
+            $(window).scroll(function() {
+                $('.animate__animated').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animate__fadeIn');
+                    }
+                });
+            });
+            
+            // Handle navigation links
+            $('a[href^="index.html#"]').on('click', function(e) {
+                e.preventDefault();
+                const targetId = $(this).attr('href').split('#')[1];
+                
+                // Show loading modal
+                loadingModal.show();
+                document.body.classList.add('loading');
+                
+                // Navigate to index page with hash
+                window.location.href = 'index.html#' + targetId;
+            });
+        });
+    </script>
+</body>
+</html>

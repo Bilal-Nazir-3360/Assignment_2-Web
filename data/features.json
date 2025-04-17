@@ -2,33 +2,39 @@
     "features": [
         {
             "title": "Task Organization",
-            "description": "Easily manage your tasks with our intuitive interface and powerful categorization tools.",
-            "icon": "fas fa-tasks"
+            "description": "Organize your tasks with our intuitive drag-and-drop interface and powerful categorization tools.",
+            "icon": "fas fa-tasks",
+            "link": "features-1.html"
         },
         {
             "title": "Progress Tracking",
             "description": "Monitor your productivity with detailed analytics and visual progress indicators.",
-            "icon": "fas fa-chart-line"
+            "icon": "fas fa-chart-line",
+            "link": "features-2.html"
         },
         {
             "title": "Team Collaboration",
-            "description": "Work together seamlessly with your team through shared projects and real-time updates.",
-            "icon": "fas fa-users"
+            "description": "Work together seamlessly with shared projects, task assignments, and communication tools.",
+            "icon": "fas fa-users",
+            "link": "features-3.html"
         },
         {
             "title": "Deadline Alerts",
-            "description": "Never miss a deadline with our smart notification system and reminders.",
-            "icon": "fas fa-bell"
+            "description": "Never miss a deadline with smart notifications and customizable reminders.",
+            "icon": "fas fa-bell",
+            "link": "features-4.html"
         },
         {
             "title": "Cloud Sync",
-            "description": "Access your tasks from anywhere with our secure cloud synchronization.",
-            "icon": "fas fa-cloud"
+            "description": "Access your tasks from anywhere with secure cloud synchronization.",
+            "icon": "fas fa-cloud",
+            "link": "features-5.html"
         },
         {
             "title": "Custom Themes",
-            "description": "Personalize your workspace with a variety of color themes and layouts.",
-            "icon": "fas fa-palette"
+            "description": "Personalize your workspace with customizable themes and layouts.",
+            "icon": "fas fa-palette",
+            "link": "features-6.html"
         }
     ]
 }

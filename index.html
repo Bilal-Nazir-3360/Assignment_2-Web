@@ -15,17 +15,52 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">PlanPilot</a>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-rocket"></i> PlanPilot</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="featuresDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-star"></i> Features
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="features-overview.html"><i class="fas fa-cube"></i> Overview</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="features-1.html"><i class="fas fa-tasks"></i> Task Organization</a></li>
+                            <li><a class="dropdown-item" href="features-2.html"><i class="fas fa-chart-line"></i> Progress Tracking</a></li>
+                            <li><a class="dropdown-item" href="features-3.html"><i class="fas fa-users"></i> Team Collaboration</a></li>
+                            <li><a class="dropdown-item" href="features-4.html"><i class="fas fa-bell"></i> Deadline Alerts</a></li>
+                            <li><a class="dropdown-item" href="features-5.html"><i class="fas fa-cloud"></i> Cloud Sync</a></li>
+                            <li><a class="dropdown-item" href="features-6.html"><i class="fas fa-palette"></i> Custom Themes</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#reviews"><i class="fas fa-comments"></i> Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown" id="userDropdown" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" id="userMenuDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user"></i> <span class="user-name"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="auth.logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -34,11 +69,53 @@
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container">
-            <h1 class="display-3 fw-bold animate__animated animate__fadeInDown">Welcome to PlanPilot</h1>
-            <p class="lead animate__animated animate__fadeIn animate__delay-1s">Streamline Your Tasks with Ease</p>
-            <p class="sub-lead mb-4 animate__animated animate__fadeIn animate__delay-2s">The ultimate task management solution for individuals and teams</p>
-            <button class="btn btn-custom mt-3 animate__animated animate__fadeInUp animate__delay-3s" id="getStartedBtn" >Get Started</button>
-            <div id="statsContainer" class="row mt-5 animate__animated animate__fadeIn animate__delay-4s"></div>
+            <div class="row align-items-center justify-content-center text-center">
+                <div class="col-md-8">
+                    <h1 class="display-3 fw-bold animate__animated animate__fadeInDown">Welcome to PlanPilot</h1>
+                    <p class="lead animate__animated animate__fadeIn animate__delay-1s">Streamline Your Tasks with Ease</p>
+                    <p class="sub-lead mb-4 animate__animated animate__fadeIn animate__delay-2s">The ultimate task management solution for individuals and teams</p>
+                    <button class="btn btn-custom mt-3 animate__animated animate__fadeInUp animate__delay-3s" id="getStartedBtn">Get Started</button>
+                </div>
+                <div class="col-md-4 text-center mt-4 mt-md-0">
+                    <i class="fas fa-rocket feature-icon animate__animated animate__bounceIn animate__delay-2s"></i>
+                </div>
+            </div>
+            <div class="row mt-5 g-4" id="statsContainer">
+                <div class="col-md-3 col-6">
+                    <div class="stat-card animate__animated animate__fadeInUp">
+                        <i class="fas fa-users"></i>
+                        <h3 class="stat-number" data-count="12500">0</h3>
+                        <p class="stat-label">Active Users</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s">
+                        <i class="fas fa-tasks"></i>
+                        <h3 class="stat-number" data-count="850000">0</h3>
+                        <p class="stat-label">Tasks Completed</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card animate__animated animate__fadeInUp" style="animation-delay: 0.4s">
+                        <i class="fas fa-users-cog"></i>
+                        <h3 class="stat-number" data-count="3200">0</h3>
+                        <p class="stat-label">Teams Using</p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-card animate__animated animate__fadeInUp" style="animation-delay: 0.6s">
+                        <i class="fas fa-star"></i>
+                        <h3 class="stat-number" data-count="4700">0</h3>
+                        <p class="stat-label">5-Star Reviews</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+            <div class="shape shape-4"></div>
         </div>
     </section>
 
@@ -59,28 +136,28 @@
                 <div class="col-md-3 col-6">
                     <div class="stat-card animate__animated animate__fadeInLeft">
                         <i class="fas fa-users fa-3x text-teal"></i>
-                        <h3 class="stat-number mt-3" data-count="25000">0</h3>
+                        <h3 class="stat-number mt-3" data-count="12500">0</h3>
                         <p class="stat-label">Active Users</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="stat-card animate__animated animate__fadeInUp">
                         <i class="fas fa-tasks fa-3x text-teal"></i>
-                        <h3 class="stat-number mt-3" data-count="980000">0</h3>
+                        <h3 class="stat-number mt-3" data-count="850000">0</h3>
                         <p class="stat-label">Tasks Completed</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="stat-card animate__animated animate__fadeInDown">
-                        <i class="fas fa-clock fa-3x text-teal"></i>
-                        <h3 class="stat-number mt-3" data-count="15000">0</h3>
-                        <p class="stat-label">Hours Saved</p>
+                        <i class="fas fa-users-cog fa-3x text-teal"></i>
+                        <h3 class="stat-number mt-3" data-count="3200">0</h3>
+                        <p class="stat-label">Teams Using</p>
                     </div>
                 </div>
                 <div class="col-md-3 col-6">
                     <div class="stat-card animate__animated animate__fadeInRight">
                         <i class="fas fa-star fa-3x text-teal"></i>
-                        <h3 class="stat-number mt-3" data-count="4900">0</h3>
+                        <h3 class="stat-number mt-3" data-count="4700">0</h3>
                         <p class="stat-label">5-Star Reviews</p>
                     </div>
                 </div>
@@ -98,6 +175,17 @@
             <form id="reviewForm" class="mx-auto mt-5" style="max-width: 500px;">
                 <div class="mb-3">
                     <input type="text" class="form-control" id="reviewName" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reviewRating" class="form-label">Your Rating</label>
+                    <div class="rating-input">
+                        <i class="far fa-star" data-rating="1"></i>
+                        <i class="far fa-star" data-rating="2"></i>
+                        <i class="far fa-star" data-rating="3"></i>
+                        <i class="far fa-star" data-rating="4"></i>
+                        <i class="far fa-star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="reviewRating" value="3">
                 </div>
                 <div class="mb-3">
                     <textarea class="form-control" id="reviewText" placeholder="Your Review" rows="3" required></textarea>
@@ -177,29 +265,78 @@
     </div>
 
     <!-- Login Modal -->
-    <div class="modal fade" id="loginModal">
-        <div class="modal-dialog">
+    <div class="modal fade auth-modal" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Login to PlanPilot</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Welcome Back
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="loginForm">
-                        <div class="mb-4">
-                            <input type="email" class="form-control" id="loginEmail" placeholder="Email" required>
+                        <div class="form-group mb-4">
+                            <label for="loginEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="loginEmail" required placeholder="Enter your email">
                         </div>
-                        <div class="mb-4">
-                            <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
+                        <div class="form-group mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required placeholder="Enter your password">
                         </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                <label class="form-check-label" for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" data-bs-dismiss="modal">
+                                Forgot Password?
+                            </a>
                         </div>
-                        <button type="submit" class="btn btn-custom w-100">Login</button>
-                        <div class="text-center mt-3">
-                            <span>Don't have an account? </span>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal">Sign up</a>
+                        <button type="submit" class="btn btn-auth mb-4">Login</button>
+                        <div class="text-center">
+                            <p class="mb-0" style="color: var(--text-secondary);">
+                                Don't have an account? 
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#signupModal" data-bs-dismiss="modal" style="color: var(--teal);">Sign up</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade auth-modal" id="forgotPasswordModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-key"></i>
+                        Reset Password
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="auth-icon-circle mb-4">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h4>Forgot your password?</h4>
+                        <p class="text-muted">Enter your email address and we'll send you instructions to reset your password.</p>
+                    </div>
+                    <form id="forgotPasswordForm">
+                        <div class="form-group mb-4">
+                            <label for="resetEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="resetEmail" required placeholder="Enter your email">
+                        </div>
+                        <button type="submit" class="btn btn-auth mb-4">Send Reset Link</button>
+                        <div class="text-center">
+                            <p class="mb-0" style="color: var(--text-secondary);">
+                                Remember your password? 
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" style="color: var(--teal);">Login</a>
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -208,35 +345,49 @@
     </div>
 
     <!-- Signup Modal -->
-    <div class="modal fade" id="signupModal">
-        <div class="modal-dialog">
+    <div class="modal fade auth-modal" id="signupModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create Your PlanPilot Account</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-plus"></i>
+                        Create Account
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="signupForm">
-                        <div class="mb-3">
-                            <input type="text" class="form-control" id="signupName" placeholder="Full Name" required>
+                        <div class="form-group mb-4">
+                            <label for="signupName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="signupName" required placeholder="Enter your full name">
                         </div>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" id="signupEmail" placeholder="Email" required>
+                        <div class="form-group mb-4">
+                            <label for="signupEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="signupEmail" required placeholder="Enter your email">
                         </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
+                        <div class="form-group mb-3">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" required placeholder="Create a password">
+                            <div class="password-strength">
+                                <div class="password-strength-bar"></div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password" required>
+                        <div class="form-group mb-4">
+                            <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="signupConfirmPassword" required placeholder="Confirm your password">
                         </div>
-                        <div class="mb-3 form-check">
+                        <div class="form-check mb-4">
                             <input type="checkbox" class="form-check-input" id="agreeTerms" required>
-                            <label class="form-check-label" for="agreeTerms">I agree to the <a href="#">Terms and Conditions</a></label>
+                            <label class="form-check-label" for="agreeTerms">
+                                I agree to the <a href="#" style="color: var(--teal);">Terms and Conditions</a>
+                            </label>
                         </div>
-                        <button type="submit" class="btn btn-custom w-100">Sign Up</button>
-                        <div class="text-center mt-3">
-                            <span>Already have an account? </span>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal">Login</a>
+                        <button type="submit" class="btn btn-auth mb-4">Create Account</button>
+                        <div class="text-center">
+                            <p class="mb-0" style="color: var(--text-secondary);">
+                                Already have an account? 
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="modal" style="color: var(--teal);">Login</a>
+                            </p>
                         </div>
                     </form>
                 </div>
@@ -246,14 +397,40 @@
 
     <!-- Notification Modal -->
     <div class="modal fade" id="notificationModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Welcome to PlanPilot!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title"><i class="fas fa-rocket text-teal me-2"></i>Welcome to PlanPilot!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Thanks for visiting PlanPilot! Start managing your tasks efficiently today.
+                    <div class="text-center mb-4">
+                        <i class="fas fa-gift fa-3x text-teal mb-3"></i>
+                        <h4>Thanks for visiting PlanPilot!</h4>
+                        <p>Start managing your tasks efficiently today with our powerful tools.</p>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="card bg-dark-teal h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-tasks fa-2x mb-2"></i>
+                                    <h5>Task Management</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card bg-dark-teal h-100">
+                                <div class="card-body text-center">
+                                    <i class="fas fa-chart-line fa-2x mb-2"></i>
+                                    <h5>Progress Tracking</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-top border-secondary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Maybe Later</button>
+                    <a href="features-overview.html" class="btn btn-teal">Explore Features</a>
                 </div>
             </div>
         </div>
@@ -266,7 +443,25 @@
         </div>
     </div>
 
+    <!-- Loading Modal -->
+    <div class="modal fade" id="pageLoadingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-dark text-light">
+                <div class="modal-body text-center p-5">
+                    <div class="loading-animation mb-4">
+                        <div class="loading-circle"></div>
+                        <div class="loading-circle"></div>
+                        <div class="loading-circle"></div>
+                    </div>
+                    <h4 class="loading-text mb-3">Loading <span class="loading-dots">...</span></h4>
+                    <p class="loading-message">Preparing your experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 </html>

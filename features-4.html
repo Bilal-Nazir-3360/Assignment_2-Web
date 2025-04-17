@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadline Alerts - PlanPilot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .feature-hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.3), rgba(255, 204, 0, 0.3));
+            z-index: 1;
+        }
+        
+        .feature-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .back-link {
+            color: var(--teal);
+            text-decoration: none;
+            margin-bottom: 30px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--yellow);
+            transform: translateX(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 5rem;
+            color: var(--teal);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .feature-demo {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-demo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(45, 212, 191, 0.3);
+        }
+        
+        .feature-benefit {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--teal);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-benefit:hover {
+            transform: translateX(10px);
+            border-left-color: var(--yellow);
+        }
+        
+        .feature-benefit i {
+            color: var(--teal);
+            margin-right: 10px;
+        }
+        
+        .feature-section {
+            padding: 80px 0;
+        }
+        
+        .feature-section:nth-child(even) {
+            background-color: #1a1a1a;
+        }
+        
+        .feature-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.1), rgba(255, 204, 0, 0.1));
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .alert-feature {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        
+        .alert-feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(45, 212, 191, 0.2);
+            border-color: var(--yellow);
+        }
+        
+        .alert-icon {
+            font-size: 2.5rem;
+            color: var(--teal);
+            margin-bottom: 15px;
+        }
+        
+        .notification-demo {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        
+        .notification-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--teal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: #121212;
+        }
+        
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+        
+        .notification-time {
+            color: #888;
+            font-size: 0.8rem;
+            margin-left: auto;
+        }
+        
+        .notification-body {
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        
+        .notification-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .notification-actions button {
+            background: transparent;
+            border: 1px solid var(--teal);
+            color: var(--teal);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .notification-actions button:hover {
+            background: var(--teal);
+            color: #121212;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--teal);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-content {
+            background: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            width: calc(50% - 30px);
+            position: relative;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: var(--teal);
+            border-radius: 50%;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: -10px;
+            width: 20px;
+            height: 20px;
+            background: var(--teal);
+            border-radius: 50%;
+        }
+        
+        .timeline-date {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--teal);
+            color: #121212;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">PlanPilot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#reviews">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="feature-hero">
+        <div class="container">
+            <a href="index.html#features" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Features
+            </a>
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold animate__animated animate__fadeInDown">Deadline Alerts</h1>
+                    <p class="lead animate__animated animate__fadeIn animate__delay-1s">Never miss a deadline again</p>
+                    <p class="animate__animated animate__fadeIn animate__delay-2s">Stay on top of your tasks with smart notifications and customizable reminders.</p>
+                    <button class="btn btn-custom mt-4 animate__animated animate__fadeInUp animate__delay-3s">Try It Now</button>
+                </div>
+                <div class="col-md-4 text-center">
+                    <i class="fas fa-bell feature-icon animate__animated animate__bounceIn animate__delay-2s"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Key Benefits</h2>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft">
+                        <i class="fas fa-bell"></i>
+                        <strong>Smart notifications</strong>
+                        <p>Receive timely alerts based on task priority and deadline proximity.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-1s">
+                        <i class="fas fa-mobile-alt"></i>
+                        <strong>Multi-channel alerts</strong>
+                        <p>Get notified via email, SMS, push notifications, and more.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-2s">
+                        <i class="fas fa-sliders-h"></i>
+                        <strong>Customizable settings</strong>
+                        <p>Configure alert frequency, timing, and delivery methods to suit your preferences.</p>
+                    </div>
+                    <div class="feature-benefit animate__animated animate__fadeInLeft animate__delay-3s">
+                        <i class="fas fa-calendar-check"></i>
+                        <strong>Proactive reminders</strong>
+                        <p>Receive early warnings to help you stay ahead of deadlines.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1551288049-ebfccdc6dbde?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Deadline Alerts Demo" class="img-fluid feature-demo animate__animated animate__fadeInRight">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-2">
+                    <h2 class="mb-4">Detailed Description</h2>
+                    <p class="lead">Our deadline alert system ensures you never miss an important task or project deadline. With intelligent notification scheduling and customizable reminder settings, you can stay on top of your work without feeling overwhelmed.</p>
+                    <div class="mt-4">
+                        <h5>Features include:</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Smart notification scheduling</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Priority-based alerts</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Multiple notification channels</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Customizable reminder intervals</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Do Not Disturb settings</li>
+                            <li class="list-group-item bg-transparent text-light"><i class="fas fa-check-circle text-teal me-2"></i>Notification history and tracking</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="feature-image animate__animated animate__fadeInLeft">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Deadline Alerts Interface" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Alert Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="alert-feature animate__animated animate__fadeInUp">
+                        <i class="fas fa-clock alert-icon"></i>
+                        <h4>Time-based Alerts</h4>
+                        <p>Set reminders based on specific times, days, or intervals before deadlines.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="alert-feature animate__animated animate__fadeInUp animate__delay-1s">
+                        <i class="fas fa-exclamation-triangle alert-icon"></i>
+                        <h4>Priority Alerts</h4>
+                        <p>Receive more frequent notifications for high-priority tasks approaching deadlines.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="alert-feature animate__animated animate__fadeInUp animate__delay-2s">
+                        <i class="fas fa-sync-alt alert-icon"></i>
+                        <h4>Recurring Reminders</h4>
+                        <p>Set up recurring alerts for regular tasks and ongoing projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Notification Examples</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="notification-demo animate__animated animate__fadeInLeft">
+                        <div class="notification-header">
+                            <div class="notification-icon">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h5 class="notification-title">Task Deadline Approaching</h5>
+                            <span class="notification-time">2 hours ago</span>
+                        </div>
+                        <div class="notification-body">
+                            <p><strong>Project Proposal</strong> is due in 24 hours. You have 3 incomplete subtasks.</p>
+                        </div>
+                        <div class="notification-actions">
+                            <button>View Task</button>
+                            <button>Snooze</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="notification-demo animate__animated animate__fadeInRight">
+                        <div class="notification-header">
+                            <div class="notification-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <h5 class="notification-title">Urgent Deadline</h5>
+                            <span class="notification-time">Just now</span>
+                        </div>
+                        <div class="notification-body">
+                            <p><strong>Client Meeting</strong> is scheduled in 1 hour. Don't forget to prepare the presentation.</p>
+                        </div>
+                        <div class="notification-actions">
+                            <button>View Details</button>
+                            <button>Mark Complete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="feature-section">
+        <div class="container">
+            <h2 class="text-center mb-5">Alert Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item animate__animated animate__fadeInUp">
+                    <div class="timeline-date">1 week before</div>
+                    <div class="timeline-content">
+                        <h5>Initial Reminder</h5>
+                        <p>First notification sent to give you plenty of time to prepare.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="timeline-date">3 days before</div>
+                    <div class="timeline-content">
+                        <h5>Progress Check</h5>
+                        <p>Reminder with a progress check to ensure you're on track.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="timeline-date">1 day before</div>
+                    <div class="timeline-content">
+                        <h5>Final Preparation</h5>
+                        <p>Last day reminder to complete any remaining tasks.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="timeline-date">Due Date</div>
+                    <div class="timeline-content">
+                        <h5>Deadline</h5>
+                        <p>Final notification on the day the task is due.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="mb-4">Ready to Never Miss a Deadline Again?</h2>
+            <p class="lead mb-5">Join thousands of users who have improved their productivity with PlanPilot's deadline alerts.</p>
+            <button class="btn btn-custom btn-lg animate__animated animate__pulse animate__infinite">
+                Get Started Now <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>© 2025 PlanPilot. All Rights Reserved.</p>
+            <p>contact@PlanPilot.com | <a href="index.html#reviews" class="text-light">Feedback</a></p>
+            <div class="mt-3">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Navbar scroll effect
+            $(window).scroll(function() {
+                $('.navbar').toggleClass('navbar-scrolled', $(this).scrollTop() > 100);
+            });
+            
+            // Animate elements on scroll
+            $(window).scroll(function() {
+                $('.animate__animated').each(function() {
+                    const elementTop = $(this).offset().top;
+                    const elementBottom = elementTop + $(this).outerHeight();
+                    const viewportTop = $(window).scrollTop();
+                    const viewportBottom = viewportTop + $(window).height();
+                    
+                    if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                        $(this).addClass('animate__fadeIn');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,6 +1,8 @@
 {
-    "active_users": "12500",
-    "tasks_completed": "850000",
-    "teams_using": "3200",
-    "five_star_reviews": "4700"
+    "stats": {
+        "active_users": 12500,
+        "tasks_completed": 850000,
+        "teams_using": 3200,
+        "five_star_reviews": 4700
+    }
 }
