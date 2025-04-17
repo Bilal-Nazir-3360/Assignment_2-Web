@@ -21,6 +21,22 @@ $(document).ready(function() {
     function loadJSONData() {
         showLoadingSpinner();
         
+        // Load stats data
+        $.ajax({
+            url: 'data/stats.json',
+            dataType: 'json',
+            success: function(data) {
+                if (data && data.stats) {
+                    renderStats(data.stats);
+                }
+                hideLoadingSpinner();
+            },
+            error: function(xhr, status, error) {
+                console.error("Error loading stats:", error);
+                hideLoadingSpinner();
+            }
+        });
+
         $.ajax({
             url: 'data/features.json',
             dataType: 'json',
@@ -45,17 +61,6 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error("Error loading reviews:", error);
-            }
-        });
-
-        $.ajax({
-            url: 'data/stats.json',
-            dataType: 'json',
-            success: function(data) {
-                renderStats(data);
-            },
-            error: function(xhr, status, error) {
-                console.error("Error loading stats:", error);
             }
         });
     }
@@ -180,19 +185,62 @@ $(document).ready(function() {
         
         Object.keys(stats).forEach((key, index) => {
             const icon = statIcons[key] || 'fas fa-chart-line';
+            const delay = index * 0.2;
             
             const statHtml = `
                 <div class="col-md-3 col-6 mb-4">
-                    <div class="stat-card">
+                    <div class="stat-card animate__animated animate__fadeInUp" style="animation-delay: ${delay}s">
                         <i class="${icon}"></i>
-                        <h3 class="stat-value">${stats[key].toLocaleString()}</h3>
+                        <h3 class="stat-number" data-count="${stats[key]}">0</h3>
                         <p class="stat-label">${key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</p>
                     </div>
                 </div>
             `;
             container.append(statHtml);
         });
+
+        // Initialize stats animation
+        animateStats();
     }
+
+    // Stats animation
+    function animateStats() {
+        $('.stat-number').each(function() {
+            const $this = $(this);
+            const countTo = parseInt($this.attr('data-count'));
+            
+            $({ countNum: 0 }).animate({
+                countNum: countTo
+            }, {
+                duration: 2000,
+                easing: 'easeOutExpo',
+                step: function() {
+                    $this.text(Math.floor(this.countNum).toLocaleString());
+                },
+                complete: function() {
+                    $this.text(countTo.toLocaleString());
+                }
+            });
+        });
+    }
+
+    // Trigger stats animation when in viewport
+    function checkStatsInView() {
+        const statsSection = $('#statsContainer');
+        if (statsSection.length) {
+            const windowHeight = $(window).height();
+            const scrollTop = $(window).scrollTop();
+            const elementTop = statsSection.offset().top;
+            
+            if (elementTop < (scrollTop + windowHeight - 100)) {
+                animateStats();
+                $(window).off('scroll.stats');
+            }
+        }
+    }
+
+    // Initialize stats animation check
+    $(window).on('scroll.stats', checkStatsInView);
 
     // Initialize star rating
     $('.rating-input i').hover(
@@ -282,27 +330,55 @@ $(document).ready(function() {
     function toggleChat() {
         chatVisible = !chatVisible;
         const chatBox = $('.chat-box');
-        const chatBadge = $('.chat-badge');
+        const chatLogo = $('.chat-logo');
         
         if (chatVisible) {
-            chatBox.animate({ bottom: '30px' }, {
+            chatBox.addClass('open').animate({ bottom: '30px' }, {
                 duration: 400,
                 easing: 'easeOutExpo',
                 start: function() {
                     chatBox.css('display', 'block');
+                    chatLogo.fadeOut(300);
                 }
             });
-            chatBadge.fadeOut(300);
         } else {
-            chatBox.animate({ bottom: '-400px' }, {
+            chatBox.removeClass('open').animate({ bottom: '-400px' }, {
                 duration: 400,
                 easing: 'easeInExpo',
                 complete: function() {
                     chatBox.css('display', 'none');
+                    chatLogo.fadeIn(300);
                 }
             });
-            chatBadge.fadeIn(300);
         }
+    }
+
+    function minimizeChat() {
+        chatVisible = false;
+        const chatBox = $('.chat-box');
+        const chatBadge = $('.chat-badge');
+        
+        chatBox.animate({ bottom: '-350px' }, {
+            duration: 400,
+            easing: 'easeInExpo',
+            complete: function() {
+                chatBox.addClass('minimized');
+            }
+        });
+        chatBadge.fadeIn(300);
+    }
+
+    function maximizeChat() {
+        chatVisible = true;
+        const chatBox = $('.chat-box');
+        const chatBadge = $('.chat-badge');
+        
+        chatBox.removeClass('minimized');
+        chatBox.animate({ bottom: '30px' }, {
+            duration: 400,
+            easing: 'easeOutExpo'
+        });
+        chatBadge.fadeOut(300);
     }
 
     function sendMessage() {
@@ -406,11 +482,22 @@ $(document).ready(function() {
 
     $('#getStartedBtn').click(() => $('html, body').animate({scrollTop: $('#features').offset().top}, 800));
 
-    $('.chat-header').click(function(e) {
-        if (!$(e.target).hasClass('close-chat') && !$(e.target).parent().hasClass('close-chat')) toggleChat();
+    $('.chat-logo').click(function() {
+        toggleChat();
     });
 
-    $('.close-chat').click(toggleChat);
+    $('.close-chat').click(function() {
+        toggleChat();
+    });
+
+    $('.chat-header').click(function(e) {
+        if (!$(e.target).hasClass('close-chat') && !$(e.target).parent().hasClass('close-chat')) {
+            if ($('.chat-box').hasClass('minimized')) {
+                maximizeChat();
+            }
+        }
+    });
+
     $('#sendChatBtn').click(sendMessage);
     $('#chatInput').keypress(e => e.which === 13 && sendMessage());
 
@@ -546,68 +633,11 @@ $(document).ready(function() {
     // Initialize navigation
     handleNavigation();
 
-    // Stats animation
-    function animateStats() {
-        $('.stat-number').each(function() {
-            const $this = $(this);
-            const countTo = parseInt($this.attr('data-count'));
-            
-            if (!$this.hasClass('counted')) {
-                $this.addClass('counted animate');
-                
-                $({ countNum: 0 }).animate({
-                    countNum: countTo
-                }, {
-                    duration: 2000,
-                    easing: 'easeOutExpo',
-                    step: function() {
-                        $this.text(Math.floor(this.countNum).toLocaleString());
-                    },
-                    complete: function() {
-                        $this.text(countTo.toLocaleString());
-                    }
-                });
-            }
-        });
-    }
-
-    // Trigger stats animation when in viewport
-    function checkStatsInView() {
-        const statsSection = $('#statsContainer');
-        if (statsSection.length) {
-            const windowHeight = $(window).height();
-            const scrollTop = $(window).scrollTop();
-            const elementTop = statsSection.offset().top;
-            
-            if (elementTop < (scrollTop + windowHeight - 100)) {
-                animateStats();
-                $(window).off('scroll.stats');
-            }
-        }
-    }
-
-    // Initialize stats animation check
-    $(window).on('scroll.stats', checkStatsInView);
-    checkStatsInView();
-
-    // Navbar scroll effect
-    $(window).scroll(function() {
-        $('.navbar').toggleClass('navbar-scrolled', $(this).scrollTop() > 100);
-    });
-
-    // Animate elements on scroll
-    $(window).scroll(function() {
-        $('.animate__animated').each(function() {
-            const elementTop = $(this).offset().top;
-            const elementBottom = elementTop + $(this).outerHeight();
-            const viewportTop = $(window).scrollTop();
-            const viewportBottom = viewportTop + $(window).height();
-            
-            if (elementBottom > viewportTop && elementTop < viewportBottom) {
-                $(this).addClass('animate__fadeIn');
-            }
-        });
-    });
+    // Show loading for 2 seconds then load content
+    handlePageLoading(() => {
+        loadJSONData();
+        setTimeout(toggleChat, 3000);
+    }, 2000);
 
     // Check for stored scroll position on page load
     $(window).on('load', function() {
@@ -656,6 +686,10 @@ $(document).ready(function() {
         setTimeout(() => $this.removeClass('loading'), 1000);
     });
 
-    loadJSONData();
-    setTimeout(toggleChat, 3000);
+    // Show chat logo after initial delay
+    setTimeout(() => {
+        if (!chatVisible) {
+            $('.chat-logo').fadeIn(300);
+        }
+    }, 3000);
 });
